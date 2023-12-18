@@ -40,7 +40,7 @@ def library_installer():
             spec = True
         if spec is not None:
             global lib_index, dw_fails
-            end_msg.configure(text=f'Download in progress', fg='orange')
+            end_msg.configure(text='Download in progress', fg='orange')
             library_list = ['bs4', 'email', 'emoji', 'keyboard', 'matplotlib', 'names', 'pandas', 'PIL',
                             'pyaudio', 'pydub', 'PyPDF2', 'nltk', 'pathlib', 'PyDictionary',
                             'pyperclip', 'pyshorteners', 'pytesseract', 'pyttsx3', 'pywin32', 'spacy',
@@ -51,7 +51,7 @@ def library_installer():
                 try:
                     subprocess.check_call([executable, 'python -m pip install --upgrade pip'])
                 except:
-                    end_msg.configure(text=f'Failded to upgrade pip', fg='red')
+                    end_msg.configure(text='Failded to upgrade pip', fg='red')
 
             try:
                 for lib in library_list[lib_index::]:
@@ -59,10 +59,7 @@ def library_installer():
                     lib_index += 1
                     print(f'Installed {lib}')
                     end_msg.configure(text=f'Download {lib}', fg='orange')
-                # installed_packages = [r.decode().split('==')[0] for r in reqs.split()]
-                # print(f'installed this librarirs:\n{installed_packages}')
-
-            except (ImportError, NameError, ModuleNotFoundError, subprocess.CalledProcessError) as e:
+            except (ImportError, NameError, subprocess.CalledProcessError) as e:
                 print(e)
                 dw_fails += 1
                 lib_index += 1
@@ -151,33 +148,32 @@ try:
     import YouTubeTranscriptApi
 
     yt_api = True
-except (ImportError, AttributeError, ModuleNotFoundError) as e:
+except (ImportError, AttributeError) as e:
     yt_api = False
 try:
     import openai
 
     openai_library = True
     chatgpt_2library = False
-except (ImportError, AttributeError, ModuleNotFoundError) as e:
+except (ImportError, AttributeError) as e:
     openai_library = ''
     try:
         chatgpt_2library = True
         from pyChatGPT import Chat, Options
-    except (ImportError, AttributeError, ModuleNotFoundError) as e:
+    except (ImportError, AttributeError) as e:
         chatgpt_2library = False
-        # second condition that if not met the user will not be able to try to use chatGPT here
 try:
     from emoticons import emoticon, demoticon
 
     emoticons_library = ACTIVE
-except (ImportError, AttributeError, ModuleNotFoundError) as e:
+except (ImportError, AttributeError) as e:
     emoticons_library = DISABLED
 
 try:
     import polyglot
 
     RA = True
-except (ImportError, ModuleNotFoundError) as e:
+except ImportError as e:
     RA = False
 
 try:
@@ -185,14 +181,14 @@ try:
 
     google_trans = True
     deep_trans = ''
-except (ImportError, AttributeError, ModuleNotFoundError) as e:
+except (ImportError, AttributeError) as e:
     google_trans = ''
 
 try:
     import git.Repo
 
     gstate = ACTIVE
-except (ImportError, AttributeError, ModuleNotFoundError) as e:
+except (ImportError, AttributeError) as e:
     gstate = DISABLED
 
 
